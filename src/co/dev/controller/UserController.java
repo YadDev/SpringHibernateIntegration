@@ -3,11 +3,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import co.dev.beans.Login;
@@ -37,13 +41,17 @@ public class UserController {
    
    @RequestMapping("/loginAuth")
    public ModelAndView loginAuthentication(@ModelAttribute("login") Login login,
-           BindingResult result) {
+           BindingResult result, SessionStatus status, HttpServletRequest request)
+   {
 	   		System.out.println("User Name from  Form page: "+login.getuName()+" and password is: "+login.getPass());
 	   		System.out.println("-------------------------loginService-----------------"+loginService);
 	   		boolean res=loginService.userAuth(login.getuName(), login.getPass());
 	   		//System.out.println("User Name from  Form page: "+login.getUName());
+	   	    status.setComplete();
 	   		if(res){
+	   			request.getSession().setAttribute("LOGGEDIN_USER", login);
 	   			return new ModelAndView("redirect:/userList");
+	   			
 	   		}
 	   		else{
 	   			return new ModelAndView("redirect:/failed");
@@ -54,7 +62,7 @@ public class UserController {
    @RequestMapping("/failed")
    public ModelAndView userLoginFailed() {
     
-	   return new ModelAndView("redirect:/login","msg","Login Failed!!!!");
+	   return new ModelAndView("success","msg","Login Failed!!!!");
 
    }
   
@@ -104,10 +112,11 @@ public class UserController {
     }
 
     @RequestMapping("/logout")
-    public ModelAndView logout() {
+    public ModelAndView invalidaUser(HttpSession session ) {
 
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("msg", "Logged Out Successfully");
+   session.invalidate();
         return new ModelAndView("redirect:/login", model);
 
     }
