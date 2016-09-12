@@ -12,15 +12,7 @@
 </head>
 <body>
 	<center>
-		<c:if test="${!empty user}">
-			<c:forEach items="${user}" var="user">
-				<tr
-					style="background-color: white; color: black; text-align: center;"
-					height="30px">
-					<td>${user.msg}</td>
-				</tr>
-			</c:forEach>
-		</c:if>
+	${msg}
 		<c:url var="userRegistration" value="loginAuth" />
 		<form:form id="loginform" modelAttribute="login" method="post"
 			action="${userRegistration}">

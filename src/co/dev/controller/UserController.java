@@ -61,9 +61,9 @@ public class UserController {
    }
  
    @RequestMapping("/failed")
-   public ModelAndView userLoginFailed() {
+   public ModelAndView userLoginFailed(@ModelAttribute("login") Login login) {
     
-	   return new ModelAndView("success","msg","Login Failed!!!!");
+	   return new ModelAndView("login","msg","Login Failed!!!!");
 
    }
   
