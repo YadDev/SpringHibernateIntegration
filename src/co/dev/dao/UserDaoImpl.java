@@ -19,7 +19,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	@Transactional
 	public void saveUser(User user) {
-		session.getCurrentSession().saveOrUpdate(user);
+		session.getCurrentSession().save(user);
 	}
 
 	@Override
@@ -29,6 +29,34 @@ public class UserDaoImpl implements UserDao {
 	
 		return listUser;
 	}
+
+	@Override
+	@Transactional
+	public void editUser(User user) {
+		try{
+			System.out.println("In Update Query");
+			session.getCurrentSession().update(user);	
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void deleteUser(int id) {
+		session.getCurrentSession().createQuery("DELETE FROM User WHERE user_id ="+id).executeUpdate();
+	}
+
+	@Override
+	public User getUserById(int id) {
+		User user=(User) session.getCurrentSession().get(User.class,id);
+		return user;
+	}
+
+	
+
+	
 	
 
 }

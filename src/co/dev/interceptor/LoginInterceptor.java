@@ -18,7 +18,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	 {
 		 System.out.println("Pre Handle Method");
 	  String uri = request.getRequestURI();
-	  if(!uri.endsWith("/login") && !uri.endsWith("logout") && !uri.endsWith("loginAuth"))
+	  if(!uri.endsWith("/login") && !uri.endsWith("logout") && !uri.endsWith("loginAuth") && !uri.endsWith("userList"))
 	  {
 	   Login userData = (Login) request.getSession().getAttribute("LOGGEDIN_USER");
 	   if(userData == null)

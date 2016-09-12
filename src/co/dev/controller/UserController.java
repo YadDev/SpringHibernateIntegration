@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,15 +42,15 @@ public class UserController {
    
    @RequestMapping("/loginAuth")
    public ModelAndView loginAuthentication(@ModelAttribute("login") Login login,
-           BindingResult result, SessionStatus status, HttpServletRequest request)
+           BindingResult result)
    {
 	   		System.out.println("User Name from  Form page: "+login.getuName()+" and password is: "+login.getPass());
 	   		System.out.println("-------------------------loginService-----------------"+loginService);
 	   		boolean res=loginService.userAuth(login.getuName(), login.getPass());
 	   		//System.out.println("User Name from  Form page: "+login.getUName());
-	   	    status.setComplete();
+	   	    
 	   		if(res){
-	   			request.getSession().setAttribute("LOGGEDIN_USER", login);
+	   		
 	   			return new ModelAndView("redirect:/userList");
 	   			
 	   		}
@@ -101,7 +102,15 @@ public class UserController {
 
     }
 
+    @RequestMapping("/edit/updateUser")
+    public ModelAndView updateUserData(@ModelAttribute("user") User user,
+            BindingResult result) {
 
+        userService.editUser(user);
+        System.out.println("Updated User Data Successfully");
+        return new ModelAndView("redirect:/userList");
+
+    }
     @RequestMapping("/userList")
     public ModelAndView getUserList() {
 
@@ -111,16 +120,31 @@ public class UserController {
 
     }
 
+    @RequestMapping("/delete/{id}")
+    public ModelAndView deleteUser(@PathVariable int id) {
+
+    	userService.deleteUser(id);
+        
+        return new ModelAndView("redirect:/userList");
+
+    }
     @RequestMapping("/logout")
     public ModelAndView invalidaUser(HttpSession session ) {
 
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("msg", "Logged Out Successfully");
-   session.invalidate();
+        session.invalidate();
         return new ModelAndView("redirect:/login", model);
 
     }
 
-    
+    @RequestMapping("/edit/{id}")
+    public ModelAndView editUser(@PathVariable int id,@ModelAttribute("users") User users) {
+    	Map<String, Object> user = new HashMap<String, Object>();
+    	//user=userService.getUserById(id);
+        user.put("user",userService.getUserById(id));
+        return new ModelAndView("success",user);
+
+    }
 
 }

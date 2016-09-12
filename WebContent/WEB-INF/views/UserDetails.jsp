@@ -6,6 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>User Details</title>
+<script type="text/javascript">
+function cnfDelete(){
+	alert("Do You Want to Delete?");
+}
+</script>
+
 </head>
 <body>
 	<center>
@@ -26,6 +32,7 @@
 					<td>Last Name</td>
 					<td>Gender</td>
 					<td>City</td>
+					<td colspan="2">Action</td>
 				</tr>
 				<c:forEach items="${user}" var="user">
 					<tr
@@ -36,6 +43,8 @@
 						<td><c:out value="${user.lastName}" /></td>
 						<td><c:out value="${user.gender}" /></td>
 						<td><c:out value="${user.city}" /></td>
+						<td><a href="edit/${user.id}">Edit</a></td>
+						<td><a href="delete/${user.id}" onclick="cnfDelete()">Delete</a></td>
 					</tr>
 				</c:forEach>
 			</table>
