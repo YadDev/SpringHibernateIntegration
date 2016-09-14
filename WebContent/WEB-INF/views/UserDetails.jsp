@@ -32,6 +32,8 @@ function cnfDelete(){
 					<td>Last Name</td>
 					<td>Gender</td>
 					<td>City</td>
+					<td>Email</td>
+					<td>Mobile</td>
 					<td colspan="2">Action</td>
 				</tr>
 				<c:forEach items="${user}" var="user">
@@ -43,13 +45,15 @@ function cnfDelete(){
 						<td><c:out value="${user.lastName}" /></td>
 						<td><c:out value="${user.gender}" /></td>
 						<td><c:out value="${user.city}" /></td>
+						<td><c:out value="${user.email}" /></td>
+						<td><c:out value="${user.phone}" /></td>
 						<td><a href="edit/${user.id}">Edit</a></td>
 						<td><a href="delete/${user.id}" onclick="cnfDelete()">Delete</a></td>
 					</tr>
 				</c:forEach>
 			</table>
 		</c:if>
-		<br> <a href="register">Click Here to add new User</a>
+		<br> <a href="addUser">Click Here to add new User</a>
 	</center>
 </body>
 </html>

@@ -61,6 +61,7 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 			<list>
 				<value>co.dev.beans.Login</value>
 				<value>co.dev.beans.User</value>
+				<value>co.dev.beans.RegisterUser</value>
 
 
 			</list>
@@ -82,5 +83,6 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 	<bean id="loginService" class="co.dev.service.LoginServiceImpl" />
 	<bean id="userDao" class="co.dev.dao.UserDaoImpl" />
 	<bean id="userService" class="co.dev.service.UserServiceImpl" />
+	<bean id="formValidators" class="co.dev.validator.FormValidation"></bean>
 
 </beans>

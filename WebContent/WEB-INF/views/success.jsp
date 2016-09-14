@@ -42,6 +42,14 @@
 					<td><form:input path="city"/></td>
 				</tr>
 				<tr>
+					<td><form:label path="email">Email</form:label></td>
+					<td><form:input path="Email"/></td>
+				</tr>
+				<tr>
+					<td><form:label path="phone">Mobile Number</form:label></td>
+					<td><form:input path="phone"/></td>
+				</tr>
+				<tr>
 					<td></td>
 					<td><input type="submit" value="Update" />
 					</td>

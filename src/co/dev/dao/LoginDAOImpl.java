@@ -8,8 +8,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.dev.beans.Login;
+import co.dev.beans.RegisterUser;
 
-@Repository
+@Repository("loginDao")
 public class LoginDAOImpl implements LoginDAO {
 	
 	
@@ -25,7 +26,7 @@ public class LoginDAOImpl implements LoginDAO {
 		//String hql="from Login where username='"+uName+"' and password='"+pass+"'";
 		System.out.println("Form data on Login DAO Impl Page is: "+ uName+" and password: "+pass);
 		//Login users = new Login();	
-		List<Login> listUser=session.getCurrentSession().createQuery("from Login").list();
+		List<Login> listUser=session.getCurrentSession().createQuery("from Login where username='"+uName+"' and password='"+pass+"'").list();
 			System.out.println("Data is: "+listUser.size());
 			if(listUser.size()>0)
 			{
@@ -46,6 +47,19 @@ public class LoginDAOImpl implements LoginDAO {
 			{
 				return false;
 			}
+	}
+
+
+	@Override
+	public void registerUser(RegisterUser register) {
+		session.getCurrentSession().save(register);
+	}
+
+
+	@Override
+	public int activateUser(String userid, String pass) {
+		int result=session.getCurrentSession().createSQLQuery("insert into login(username,password) values ('"+userid+"','"+pass+"')").executeUpdate();
+		return result;
 	}
 
 }

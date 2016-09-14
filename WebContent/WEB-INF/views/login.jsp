@@ -32,7 +32,7 @@
 				</tr>
 			</table>
 		</form:form>
-		<br> <a href="register">Click Here to Register Yourself</a>
+		<br> <a href="userRegistration">Click Here to Register Yourself</a>
 	</center>
 </body>
 </html>
