@@ -16,9 +16,9 @@
 		<div style="color: teal; font-size: 30px">New User Detail</div>
 		<br>
 		<br>
-		<c:url var="userRegistration" value="saveUser" />
+<%-- 		<c:url var="userRegistration" value="saveUser" /> --%>
 		<form:form id="registerForm" modelAttribute="user" method="post" 
-			action="${userRegistration}">
+			action="saveUser">
 			<table width="800px" height="150px">
 				<tr>
 					<td><form:label path="firstName">First Name</form:label></td>
@@ -52,7 +52,7 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="submit" value="Register" />&nbsp &nbsp <a href="userList">Back</a></td>
+					<td><input type="submit" value="Add User" />&nbsp &nbsp <a href="userList">Back</a></td>
 				</tr>
 			</table>
 		</form:form>

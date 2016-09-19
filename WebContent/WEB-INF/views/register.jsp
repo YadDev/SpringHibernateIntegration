@@ -16,9 +16,9 @@
 		<div style="color: teal; font-size: 30px">Register Yourself Here</div>
 		<br>
 		<br>
-		<c:url var="userRegistration" value="registerUser" />
+<%-- 		<c:url var="userRegistration" value="registerUser" /> --%>
 		<form:form id="registerForm" modelAttribute="regUser" method="post" 
-			action="${userRegistration}">
+			action="registerUser">
 			<table width="800px" height="150px">
 				<tr>
 					<td><form:label path="firstName">First Name</form:label></td>
